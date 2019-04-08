@@ -18,6 +18,19 @@ Player::Player() {
     isAlive = true;
     score = 0;
 
+    font.loadFromFile("assets/strikefighter.ttf");
+    scoreText.setFont(font);
+    scoreText.setPosition(40, 40);
+    scoreText.setCharacterSize(24);
+    scoreText.setFillColor(sf::Color::White);
+    scoreText.setString("Score: 0");
+
+    gameOverText.setFont(font);
+    gameOverText.setPosition(40, 100);
+    gameOverText.setCharacterSize(36);
+    gameOverText.setFillColor(sf::Color::Red);
+    gameOverText.setString("Game Over\nPress \"R\" to restart!");
+
     spritesheet.loadFromFile("assets/dino.png");
 }
 
@@ -66,7 +79,8 @@ void Player::animation() {
         if (isCrouching) {
             texture.loadFromImage(spritesheet, sf::IntRect(SPRITE_CROUNCH * SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
         } else {
-            int frame = animClock.getElapsedTime().asMilliseconds() / 100;
+            int animSpeed = 100 - (int)clock.getElapsedTime().asSeconds();
+            int frame = animClock.getElapsedTime().asMilliseconds() / (animSpeed < 30 ? 30 : animSpeed);
             int spriteFrame = SPRITE_WALK_START + frame;
 
             if (spriteFrame > SPRITE_WALK_END) {
@@ -99,11 +113,12 @@ void Player::update(sf::RenderTarget &render, float dt) {
         return;
     }
 
-    if (clock.getElapsedTime().asSeconds() > 1 && isAlive) {
-        clock.restart();
+    if (scoreClock.getElapsedTime().asSeconds() > 1 && isAlive) {
+        scoreClock.restart();
         score += 10;
-        printf("Score: %d\n", score);
     }
+
+    scoreText.setString("Score: " + std::to_string(score));
 
     crouch(dt);
     jump(dt);
@@ -117,6 +132,11 @@ void Player::update(sf::RenderTarget &render, float dt) {
 void Player::draw(sf::RenderWindow &window) {
     sprite.setPosition(self.getPosition());
     window.draw(sprite);
+    window.draw(scoreText);
+
+    if (isGameOver()) {
+        window.draw(gameOverText);
+    }
 }
 
 void Player::restart() {
@@ -129,4 +149,7 @@ void Player::restart() {
     isCrouching = false;
     isAlive = true;
     score = 0;
+    clock.restart();
+    animClock.restart();
+    scoreClock.restart();
 }

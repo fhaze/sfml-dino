@@ -45,7 +45,7 @@ void ObstacleGenerator::update(float dt) {
 }
 
 void ObstacleGenerator::draw(sf::RenderWindow &render) {
-    for (auto & it : self) {
+    for (auto &it : self) {
         it.draw(render);
     }
 }

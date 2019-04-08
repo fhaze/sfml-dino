@@ -24,6 +24,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
 
 class Player {
 private:
@@ -32,7 +34,11 @@ private:
     sf::Sprite sprite;
     sf::Texture texture;
     sf::Clock clock;
+    sf::Clock scoreClock;
     sf::Clock animClock;
+    sf::Font font;
+    sf::Text scoreText;
+    sf::Text gameOverText;
     bool isJumping;
     bool isCrouching;
     bool isAlive;
