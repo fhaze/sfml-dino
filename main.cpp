@@ -11,7 +11,7 @@ int main() {
     sf::Clock clock;
 
     Player player;
-    ObstacleGenerator obstacleGenerator;
+    ObstacleGenerator obstacleGenerator(player);
 
     while (window.isOpen()) {
         sf::Time dtTime = dtClock.restart();

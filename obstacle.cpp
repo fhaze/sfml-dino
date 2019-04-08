@@ -8,15 +8,20 @@
 Obstacle::Obstacle(float speed) {
     this->speed = speed;
     self = sf::RectangleShape(sf::Vector2f(50, 50));
+    self.setOrigin(25, 50);
     self.setFillColor(sf::Color::Red);
+}
+
+void Obstacle::setPosition(sf::Vector2f vec2f) {
+    self.setPosition(vec2f);
 }
 
 sf::Vector2f Obstacle::getPosition() {
     return self.getPosition();
 }
 
-void Obstacle::setPosition(sf::Vector2f vec2f) {
-    self.setPosition(vec2f);
+sf::FloatRect Obstacle::getGlobalBounds() {
+    return self.getGlobalBounds();
 }
 
 void Obstacle::draw(sf::RenderWindow &render) {

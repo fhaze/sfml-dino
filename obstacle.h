@@ -15,6 +15,7 @@ public:
     explicit Obstacle(float speed);
     void setPosition(sf::Vector2f vec2f);
     sf::Vector2f getPosition();
+    sf::FloatRect getGlobalBounds();
     void update(float dt);
     void draw(sf::RenderWindow &render);
 };
