@@ -5,13 +5,20 @@
 #ifndef SFML_TUTORIAL_PLAYER_H
 #define SFML_TUTORIAL_PLAYER_H
 
-#define HEIGHT_STAND 80
+#define HEIGHT_STAND 66
 #define HEIGHT_CROUCHING 50
 
 #define JUMP_POWER 2000
 #define FALL_SPEED 10000
 #define START_POSITION_X 100
 #define START_POSITION_Y 340
+
+#define SPRITE_WIDTH 24
+#define SPRITE_HEIGHT 24
+#define SPRITE_WALK_START 4
+#define SPRITE_WALK_END 9
+#define SPRITE_DEAD 14
+#define SPRITE_CROUNCH 17
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -20,9 +27,11 @@
 class Player {
 private:
     sf::RectangleShape self;
+    sf::Image spritesheet;
     sf::Sprite sprite;
     sf::Texture texture;
     sf::Clock clock;
+    sf::Clock animClock;
     bool isJumping;
     bool isCrouching;
     bool isAlive;
@@ -31,6 +40,7 @@ private:
     void jump(float dt);
     void crouch(float dt);
     void normalise();
+    void animation();
 public:
     Player();
     sf::FloatRect getGlobalBounds();

@@ -18,13 +18,7 @@ Player::Player() {
     isAlive = true;
     score = 0;
 
-    sf::Image spritesheet;
     spritesheet.loadFromFile("assets/dino.png");
-    texture.loadFromImage(spritesheet, sf::IntRect(0, 0, 25, 25));
-    sprite.setTexture(texture);
-    sprite.setPosition(400, 300);
-    sprite.setScale(sf::Vector2f(4, 4));
-    sprite.setOrigin(12.5f, 25);
 }
 
 void Player::jump(float dt) {
@@ -61,6 +55,31 @@ void Player::normalise() {
     }
 }
 
+void Player::animation() {
+    if (isGameOver()) {
+        texture.loadFromImage(spritesheet, sf::IntRect(SPRITE_DEAD * SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
+    }
+    else if (isJumping) {
+    }
+    else {
+        if (isCrouching) {
+            texture.loadFromImage(spritesheet, sf::IntRect(SPRITE_CROUNCH * SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
+        } else {
+            int frame = animClock.getElapsedTime().asMilliseconds() / 100;
+            int spriteFrame = SPRITE_WALK_START + frame;
+
+            if (spriteFrame > SPRITE_WALK_END) {
+                animClock.restart();
+                spriteFrame = SPRITE_WALK_START;
+            }
+            texture.loadFromImage(spritesheet, sf::IntRect(spriteFrame * SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
+            sprite.setTexture(texture);
+            sprite.setScale(sf::Vector2f(4, 4));
+            sprite.setOrigin(12.5f, 21);
+        }
+    }
+}
+
 sf::FloatRect Player::getGlobalBounds() {
     return self.getGlobalBounds();
 }
@@ -75,6 +94,7 @@ bool Player::isGameOver() {
 
 void Player::update(sf::RenderTarget &render, float dt) {
     if (isGameOver()) {
+        animation();
         return;
     }
 
@@ -86,6 +106,7 @@ void Player::update(sf::RenderTarget &render, float dt) {
 
     crouch(dt);
     jump(dt);
+    animation();
 
     self.move(0, ySpeed * dt);
 
@@ -93,7 +114,6 @@ void Player::update(sf::RenderTarget &render, float dt) {
 }
 
 void Player::draw(sf::RenderWindow &window) {
-    window.draw(self);
     sprite.setPosition(self.getPosition().x, self.getPosition().y);
     window.draw(sprite);
 }
