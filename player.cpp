@@ -16,18 +16,14 @@ Player::Player() {
 }
 
 void Player::jump(float dt) {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isJumping) {
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) && !isJumping) {
         isJumping = true;
-        ySpeed = JUMP_POWER * -dt;
+        ySpeed = -JUMP_POWER;
     }
     if (isJumping) {
-        if (ySpeed < MAX_FALL_SPEED) {
-            ySpeed += FALL_SPEED * dt;
-        } else {
-            ySpeed = MAX_FALL_SPEED;
-        }
+        ySpeed += FALL_SPEED * dt;
 
-        if (self.getPosition().y + ySpeed > START_POSITION_Y) {
+        if (self.getPosition().y > START_POSITION_Y) {
             isJumping = false;
             ySpeed = 0;
             self.setPosition(self.getPosition().x, START_POSITION_Y);
@@ -37,7 +33,7 @@ void Player::jump(float dt) {
 
 void Player::update(sf::RenderTarget &render, float dt) {
     jump(dt);
-    self.move(0, ySpeed);
+    self.move(0, ySpeed * dt);
 }
 
 void Player::draw(sf::RenderWindow &window) {
