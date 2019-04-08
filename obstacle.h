@@ -5,15 +5,14 @@
 #ifndef SFML_DINO_OBSTACLE_H
 #define SFML_DINO_OBSTACLE_H
 
-#define SPEED 500
-
 #include <SFML/Graphics/RectangleShape.hpp>
 
 class Obstacle {
 private:
     sf::RectangleShape self;
+    float speed;
 public:
-    Obstacle();
+    explicit Obstacle(float speed);
     void setPosition(sf::Vector2f vec2f);
     sf::Vector2f getPosition();
     void update(float dt);

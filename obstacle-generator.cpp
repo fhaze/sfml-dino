@@ -6,15 +6,16 @@
 #include <math.h>
 
 void ObstacleGenerator::add(sf::Vector2f vec2f) {
-    Obstacle obstacle;
+    float multiplier = clock.getElapsedTime().asSeconds();
+    Obstacle obstacle(500 + multiplier * 10);
     obstacle.setPosition(vec2f);
     self.push_front(obstacle);
 }
 
 void ObstacleGenerator::spawn() {
-    float time = clock.getElapsedTime().asSeconds();
+    float time = spawnClock.getElapsedTime().asSeconds();
     if (time > 1) {
-        clock.restart();
+        spawnClock.restart();
         add(sf::Vector2f(800, 300));
     }
 }

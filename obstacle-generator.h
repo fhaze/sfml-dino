@@ -15,6 +15,7 @@ class ObstacleGenerator {
 private:
     list <Obstacle> self;
     sf::Clock clock;
+    sf::Clock spawnClock;
     void add(sf::Vector2f vec2f);
 public:
     void spawn();

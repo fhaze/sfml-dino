@@ -5,7 +5,8 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "obstacle.h"
 
-Obstacle::Obstacle() {
+Obstacle::Obstacle(float speed) {
+    this->speed = speed;
     self = sf::RectangleShape(sf::Vector2f(50, 50));
     self.setFillColor(sf::Color::Red);
 }
@@ -23,5 +24,5 @@ void Obstacle::draw(sf::RenderWindow &render) {
 }
 
 void Obstacle::update(float dt) {
-    self.move(-SPEED * dt, 0);
+    self.move(-this->speed * dt, 0);
 }
