@@ -19,6 +19,7 @@
 #define SPRITE_WALK_END 9
 #define SPRITE_DEAD 14
 #define SPRITE_CROUNCH 17
+#define SPRITE_JUMP 12
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>

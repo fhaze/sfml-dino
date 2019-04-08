@@ -60,6 +60,7 @@ void Player::animation() {
         texture.loadFromImage(spritesheet, sf::IntRect(SPRITE_DEAD * SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
     }
     else if (isJumping) {
+        texture.loadFromImage(spritesheet, sf::IntRect(SPRITE_JUMP * SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
     }
     else {
         if (isCrouching) {
@@ -100,7 +101,7 @@ void Player::update(sf::RenderTarget &render, float dt) {
 
     if (clock.getElapsedTime().asSeconds() > 1 && isAlive) {
         clock.restart();
-        score += (int)(1000 * dt);
+        score += 10;
         printf("Score: %d\n", score);
     }
 
