@@ -8,9 +8,9 @@
 #include "player.h"
 
 Player::Player() {
-    me = sf::RectangleShape(sf::Vector2f(50, 80));
-    me.setFillColor(sf::Color::Green);
-    me.setPosition(START_POSITION_X, START_POSITION_Y);
+    self = sf::RectangleShape(sf::Vector2f(50, 80));
+    self.setFillColor(sf::Color::Green);
+    self.setPosition(START_POSITION_X, START_POSITION_Y);
     ySpeed = 0;
     isJumping = false;
 }
@@ -22,24 +22,24 @@ void Player::jump(float dt) {
     }
     if (isJumping) {
         if (ySpeed < MAX_FALL_SPEED) {
-            ySpeed += 80 * dt;
+            ySpeed += FALL_SPEED * dt;
         } else {
             ySpeed = MAX_FALL_SPEED;
         }
 
-        if (me.getPosition().y + ySpeed > START_POSITION_Y) {
+        if (self.getPosition().y + ySpeed > START_POSITION_Y) {
             isJumping = false;
             ySpeed = 0;
-            me.setPosition(me.getPosition().x, START_POSITION_Y);
+            self.setPosition(self.getPosition().x, START_POSITION_Y);
         }
     }
 }
 
 void Player::update(sf::RenderTarget &render, float dt) {
     jump(dt);
-    me.move(0, ySpeed);
+    self.move(0, ySpeed);
 }
 
 void Player::draw(sf::RenderWindow &window) {
-    window.draw(me);
+    window.draw(self);
 }

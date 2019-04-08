@@ -6,6 +6,7 @@
 #define SFML_TUTORIAL_PLAYER_H
 
 #define JUMP_POWER 2000
+#define FALL_SPEED 70
 #define MAX_FALL_SPEED 15
 #define START_POSITION_X 100
 #define START_POSITION_Y 260
@@ -14,7 +15,7 @@
 
 class Player {
 private:
-    sf::RectangleShape me;
+    sf::RectangleShape self;
     bool isJumping;
     float ySpeed;
     void jump(float dt);
