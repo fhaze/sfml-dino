@@ -5,6 +5,10 @@
 #ifndef SFML_DINO_OBSTACLEGENERATOR_H
 #define SFML_DINO_OBSTACLEGENERATOR_H
 
+#define SPAWN_X 800
+#define SPAWN_Y 255
+#define SPAWN_RANDOM_Y 150
+
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Obstacle.h"
 #include "Player.h"
