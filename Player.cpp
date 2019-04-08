@@ -114,7 +114,6 @@ void Player::update(sf::RenderTarget &render, float dt) {
 }
 
 void Player::draw(sf::RenderWindow &window) {
-    window.draw(self);
     sprite.setPosition(self.getPosition());
     window.draw(sprite);
 }
