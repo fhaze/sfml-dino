@@ -8,8 +8,8 @@
 #include "Player.h"
 
 Player::Player() {
-    self = sf::RectangleShape(sf::Vector2f(50, HEIGHT_STAND));
-    self.setOrigin(25, HEIGHT_STAND);
+    self = sf::RectangleShape(sf::Vector2f(30, HEIGHT_STAND));
+    self.setOrigin(15, HEIGHT_STAND);
     self.setFillColor(sf::Color::Green);
     self.setPosition(START_POSITION_X, START_POSITION_Y);
     ySpeed = 0;
@@ -38,12 +38,12 @@ void Player::crouch(float dt) {
         if (isJumping) {
             ySpeed += (FALL_SPEED * 2) * dt;
         } else {
-            self.setSize(sf::Vector2f(50, HEIGHT_CROUCHING));
-            self.setOrigin(25, HEIGHT_CROUCHING);
+            self.setSize(sf::Vector2f(30, HEIGHT_CROUCHING));
+            self.setOrigin(15, HEIGHT_CROUCHING);
         }
     } else {
-        self.setSize(sf::Vector2f(50, HEIGHT_STAND));
-        self.setOrigin(25, HEIGHT_STAND);
+        self.setSize(sf::Vector2f(30, HEIGHT_STAND));
+        self.setOrigin(15, HEIGHT_STAND);
     }
 }
 
@@ -114,7 +114,8 @@ void Player::update(sf::RenderTarget &render, float dt) {
 }
 
 void Player::draw(sf::RenderWindow &window) {
-    sprite.setPosition(self.getPosition().x, self.getPosition().y);
+    window.draw(self);
+    sprite.setPosition(self.getPosition());
     window.draw(sprite);
 }
 
