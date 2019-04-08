@@ -5,7 +5,7 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
-#include "player.h"
+#include "Player.h"
 
 Player::Player() {
     self = sf::RectangleShape(sf::Vector2f(50, HEIGHT_STAND));
@@ -17,6 +17,14 @@ Player::Player() {
     isCrouching = false;
     isAlive = true;
     score = 0;
+
+    sf::Image spritesheet;
+    spritesheet.loadFromFile("assets/dino.png");
+    texture.loadFromImage(spritesheet, sf::IntRect(0, 0, 25, 25));
+    sprite.setTexture(texture);
+    sprite.setPosition(400, 300);
+    sprite.setScale(sf::Vector2f(4, 4));
+    sprite.setOrigin(12.5f, 25);
 }
 
 void Player::jump(float dt) {
@@ -86,4 +94,18 @@ void Player::update(sf::RenderTarget &render, float dt) {
 
 void Player::draw(sf::RenderWindow &window) {
     window.draw(self);
+    sprite.setPosition(self.getPosition().x, self.getPosition().y);
+    window.draw(sprite);
+}
+
+void Player::restart() {
+    self = sf::RectangleShape(sf::Vector2f(50, HEIGHT_STAND));
+    self.setOrigin(25, HEIGHT_STAND);
+    self.setFillColor(sf::Color::Green);
+    self.setPosition(START_POSITION_X, START_POSITION_Y);
+    ySpeed = 0;
+    isJumping = false;
+    isCrouching = false;
+    isAlive = true;
+    score = 0;
 }

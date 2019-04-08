@@ -3,7 +3,7 @@
 //
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "obstacle.h"
+#include "Obstacle.h"
 
 Obstacle::Obstacle(float speed) {
     this->speed = speed;

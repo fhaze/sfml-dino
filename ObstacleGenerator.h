@@ -2,12 +2,12 @@
 // Created by fhaze on 19/04/08.
 //
 
-#ifndef SFML_DINO_OBSTACLE_GENERATOR_H
-#define SFML_DINO_OBSTACLE_GENERATOR_H
+#ifndef SFML_DINO_OBSTACLEGENERATOR_H
+#define SFML_DINO_OBSTACLEGENERATOR_H
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "obstacle.h"
-#include "player.h"
+#include "Obstacle.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -23,7 +23,8 @@ public:
     void spawn();
     void update(float dt);
     void draw(sf::RenderWindow &render);
+    void restart();
 };
 
 
-#endif //SFML_DINO_OBSTACLE_GENERATOR_H
+#endif //SFML_DINO_OBSTACLEGENERATOR_H

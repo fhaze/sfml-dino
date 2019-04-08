@@ -13,11 +13,15 @@
 #define START_POSITION_X 100
 #define START_POSITION_Y 340
 
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 class Player {
 private:
     sf::RectangleShape self;
+    sf::Sprite sprite;
+    sf::Texture texture;
     sf::Clock clock;
     bool isJumping;
     bool isCrouching;
@@ -34,6 +38,7 @@ public:
     bool isGameOver();
     void update(sf::RenderTarget &render, float dt);
     void draw(sf::RenderWindow &window);
+    void restart();
 };
 
 

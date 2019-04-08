@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include "player.h"
-#include "obstacle-generator.h"
+#include "Player.h"
+#include "ObstacleGenerator.h"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800,600), "SFML Dino");
@@ -21,6 +21,11 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::EventType::Closed)
                 window.close();
+        }
+
+        if (player.isGameOver() && sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+            player.restart();
+            obstacleGenerator.restart();
         }
 
         obstacleGenerator.update(dt);

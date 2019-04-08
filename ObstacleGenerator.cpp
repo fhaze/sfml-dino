@@ -2,7 +2,7 @@
 // Created by fhaze on 19/04/08.
 //
 
-#include "obstacle-generator.h"
+#include "ObstacleGenerator.h"
 #include <math.h>
 
 ObstacleGenerator::ObstacleGenerator(Player &ref_player) : player(ref_player) {
@@ -17,7 +17,8 @@ void ObstacleGenerator::add(sf::Vector2f vec2f) {
 
 void ObstacleGenerator::spawn() {
     float time = spawnClock.getElapsedTime().asSeconds();
-    if (time > 1) {
+    float multiplier = clock.getElapsedTime().asSeconds();
+    if (time > 1 - (multiplier * 0.01)) {
         spawnClock.restart();
         add(sf::Vector2f(800, 200 + rand() % 150));
     }
@@ -47,4 +48,10 @@ void ObstacleGenerator::draw(sf::RenderWindow &render) {
     for (auto & it : self) {
         it.draw(render);
     }
+}
+
+void ObstacleGenerator::restart() {
+    clock.restart();
+    spawnClock.restart();
+    self = std::vector<Obstacle>();
 }
