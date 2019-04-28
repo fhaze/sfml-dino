@@ -13,8 +13,6 @@
 #include "Obstacle.h"
 #include "Player.h"
 
-using namespace std;
-
 class ObstacleGenerator {
 private:
     std::vector <Obstacle> self;
