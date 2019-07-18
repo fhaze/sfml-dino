@@ -13,6 +13,7 @@ Player::Player() {
     self.setFillColor(sf::Color::Green);
     self.setPosition(START_POSITION_X, START_POSITION_Y);
     ySpeed = 0;
+    xSpeed = 0;
     isJumping = false;
     isCrouching = false;
     isAlive = true;
@@ -32,6 +33,16 @@ Player::Player() {
     gameOverText.setString("Game Over\nPress \"R\" to restart!");
 
     spritesheet.loadFromFile("assets/dino.png");
+}
+
+void Player::move() {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        xSpeed = -5;
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        xSpeed = 5;
+    } else {
+        xSpeed = 0;
+    }
 }
 
 void Player::jump(float dt) {
@@ -120,11 +131,12 @@ void Player::update(sf::RenderTarget &render, float dt) {
 
     scoreText.setString("Score: " + std::to_string(score));
 
+    move();
     crouch(dt);
     jump(dt);
     animation();
 
-    self.move(0, ySpeed * dt);
+    self.move(xSpeed, ySpeed * dt);
 
     normalise();
 }

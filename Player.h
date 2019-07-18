@@ -43,7 +43,9 @@ private:
     bool isCrouching;
     bool isAlive;
     float ySpeed;
+    float xSpeed;
     int score;
+    void move();
     void jump(float dt);
     void crouch(float dt);
     void normalise();
